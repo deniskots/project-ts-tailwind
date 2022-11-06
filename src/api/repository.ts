@@ -2,6 +2,13 @@
 import { createApi } from '@reduxjs/toolkit/query/react'
 import {axiosBaseQuery} from "../core/axios-base-query";
 import {GlobalFeedIn} from "./dto/global-feed.in";
+import {PAGE_SIZE} from "../consts";
+
+
+interface GlobalFeedParams{
+    page: number
+}
+
 
 // Define a service using a base URL and expected endpoints
 export const projectApi = createApi({
@@ -10,10 +17,14 @@ export const projectApi = createApi({
         baseUrl: 'https://api.realworld.io/api'
     }),
     endpoints: (builder) => ({
-        getGlobalFeed: builder.query<GlobalFeedIn, any>({
-            query: (name) => ({
+        getGlobalFeed: builder.query<GlobalFeedIn, GlobalFeedParams>({
+            query: ({page}) => ({
                 url: '/articles',
-                method: 'get'
+                method: 'get',
+                params: {
+                    limit: PAGE_SIZE,
+                    offset: page * PAGE_SIZE
+                }
             }),
         }),
     }),
