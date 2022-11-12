@@ -4,18 +4,21 @@ import {PostList} from "../post/post-list";
 import {useGetGlobalFeedQuery} from "../../api/repository";
 import ReactPaginate from "react-paginate";
 import {PAGE_SIZE} from "../../consts";
+import {PopularTags} from "../popularTags/PopularTags";
+import {useSearchParams} from "react-router-dom";
 
 interface MainPartProps {
 }
 
 export const MainPart: FC<MainPartProps> = () => {
+    const [searchParams, setSearchParams] = useSearchParams()
     const [page, setPage] = useState(0)
     const handleChangePage = ({selected}: {selected: number}) => {
         setPage(selected)
     }
-    const {data, error, isLoading} = useGetGlobalFeedQuery({page})
+    const {data, error, isLoading, isFetching,} = useGetGlobalFeedQuery({page, tag: searchParams.get('tag')})
 
-    if (isLoading) {
+    if (isLoading || isFetching) {
         return (
             <Container>
                 Идет загрузка...
@@ -50,7 +53,9 @@ export const MainPart: FC<MainPartProps> = () => {
                         />
                     </div>
                 </div>
-                <div className='w-1/4'> Tags</div>
+                <div className='w-1/4 pl-3'>
+                    <PopularTags />
+                </div>
             </div>
 
         </Container>

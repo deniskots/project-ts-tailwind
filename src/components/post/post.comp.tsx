@@ -36,7 +36,7 @@ export const Post: FC<PostProps> = ({author, createdAt, favoritesCount,title, de
                     <p className='text-theme-grey font-light'>
                         {description}
                     </p>
-                    <div className='flex justify-between'>
+                    <div className='flex justify-between py-2'>
                         <span className='text-theme-black text-sm font-light'>открыть больше...</span>
                         <TagList list={tagList}/>
                     </div>

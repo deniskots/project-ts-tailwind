@@ -1,9 +1,7 @@
 import React, {FC} from 'react';
 import { Post } from './post.comp';
-import {Container} from "../container/container.comp";
 import {Article} from "../../api/dto/global-feed.in";
-import ReactPaginate from "react-paginate";
-import { PAGE_SIZE } from '../../consts';
+
 
 interface PostListProps{
     list: Article[];

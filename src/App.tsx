@@ -7,7 +7,7 @@ interface AppProps {}
 
 export const App: FC<AppProps> = ({}) => {
   return (
-    <div>
+    <div className='py-16'>
         <Header/>
         <Subtitle/>
         <MainPart/>

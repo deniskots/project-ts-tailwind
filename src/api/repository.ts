@@ -3,10 +3,12 @@ import { createApi } from '@reduxjs/toolkit/query/react'
 import {axiosBaseQuery} from "../core/axios-base-query";
 import {GlobalFeedIn} from "./dto/global-feed.in";
 import {PAGE_SIZE} from "../consts";
+import {PopularTagsIn} from "./dto/popularTags.in";
 
 
 interface GlobalFeedParams{
     page: number
+    tag: string | null
 }
 
 
@@ -18,18 +20,25 @@ export const projectApi = createApi({
     }),
     endpoints: (builder) => ({
         getGlobalFeed: builder.query<GlobalFeedIn, GlobalFeedParams>({
-            query: ({page}) => ({
+            query: ({page, tag}) => ({
                 url: '/articles',
                 method: 'get',
                 params: {
                     limit: PAGE_SIZE,
-                    offset: page * PAGE_SIZE
+                    offset: page * PAGE_SIZE,
+                    tag
                 }
             }),
         }),
+        getPopularTags: builder.query<PopularTagsIn, any>({
+            query: () => ({
+                url: '/tags',
+                method: 'get',
+            })
+        })
     }),
 })
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const {useGetGlobalFeedQuery} = projectApi
+export const {useGetGlobalFeedQuery, useGetPopularTagsQuery} = projectApi

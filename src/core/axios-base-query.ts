@@ -2,9 +2,6 @@ import { createApi } from '@reduxjs/toolkit/query'
 import type { BaseQueryFn } from '@reduxjs/toolkit/query'
 import axios, {AxiosError, AxiosRequestConfig} from 'axios'
 
-
-
-
 export const axiosBaseQuery =
   (
     { baseUrl }: { baseUrl: string } = { baseUrl: '' }

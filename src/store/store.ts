@@ -3,9 +3,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import type { TypedUseSelectorHook } from 'react-redux'
 import {projectApi} from "../api/repository";
 
+
 export const store = configureStore({
     reducer: {
         [projectApi.reducerPath]: projectApi.reducer,
+
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat(projectApi.middleware),
