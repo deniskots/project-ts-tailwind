@@ -15,7 +15,8 @@ module.exports = {
                     black: 'rgba(72,71,71,0.97)',
                     grey: 'rgba(175,145,145,0.97)',
                     tagBg: 'rgba(192,192,192,0.97)',
-                    tagItemBg: 'rgba(124,124,124,0.97)'
+                    tagItemBg: 'rgba(124,124,124,0.97)',
+                    profileBanner: 'rgba(160,162,155,0.97)',
                 },
             },
         },

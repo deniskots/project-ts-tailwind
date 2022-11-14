@@ -1,16 +1,19 @@
 import React, {FC} from 'react';
 import {Header} from "./components/header/header.comp";
-import {Subtitle} from "./components/subtitle/subtitle.comp";
-import {MainPart} from "./components/main-part/mainPart";
+import {Route, Routes} from "react-router-dom";
+import {HomePage} from "./pages/homePage/HomePage";
+import {ProfilePage} from "./pages/profilePage/ProfilePage";
 
 interface AppProps {}
 
 export const App: FC<AppProps> = ({}) => {
   return (
-    <div className='py-16'>
+    <div className='pb-16'>
         <Header/>
-        <Subtitle/>
-        <MainPart/>
+        <Routes>
+            <Route path='/' element={<HomePage/>}/>
+            <Route path='/@:profile' element={<ProfilePage/>}/>
+        </Routes>
     </div>
   );
 }

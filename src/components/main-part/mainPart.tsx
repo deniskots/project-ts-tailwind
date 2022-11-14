@@ -1,22 +1,27 @@
 import React, {FC, useState} from 'react';
 import {Container} from "../container/container.comp";
 import {PostList} from "../post/post-list";
-import {useGetGlobalFeedQuery} from "../../api/repository";
+import {FeedData} from "../../api/repository";
 import ReactPaginate from "react-paginate";
 import {PAGE_SIZE} from "../../consts";
 import {PopularTags} from "../popularTags/PopularTags";
 import {useSearchParams} from "react-router-dom";
 
+import { serializeSearchParams } from '../../utils/router';
+
 interface MainPartProps {
+    isLoading: boolean;
+    isFetching: boolean;
+    error: any;
+    data?: FeedData;
 }
 
-export const MainPart: FC<MainPartProps> = () => {
+export const MainPart: FC<MainPartProps> = ({data,isLoading,isFetching,error}) => {
     const [searchParams, setSearchParams] = useSearchParams()
-    const [page, setPage] = useState(0)
+    const page = searchParams.get('page') ? Number(searchParams.get('page')) : 0
     const handleChangePage = ({selected}: {selected: number}) => {
-        setPage(selected)
+        setSearchParams(serializeSearchParams({page: String(selected)}))
     }
-    const {data, error, isLoading, isFetching,} = useGetGlobalFeedQuery({page, tag: searchParams.get('tag')})
 
     if (isLoading || isFetching) {
         return (
@@ -57,7 +62,6 @@ export const MainPart: FC<MainPartProps> = () => {
                     <PopularTags />
                 </div>
             </div>
-
         </Container>
     );
 };

@@ -1,14 +1,25 @@
 // Need to use the React-specific entry point to import createApi
 import { createApi } from '@reduxjs/toolkit/query/react'
 import {axiosBaseQuery} from "../core/axios-base-query";
-import {GlobalFeedIn} from "./dto/global-feed.in";
+import {Article, GlobalFeedIn} from "./dto/global-feed.in";
 import {PAGE_SIZE} from "../consts";
 import {PopularTagsIn} from "./dto/popularTags.in";
+import {transformResponse} from "../utils/transformResponse";
 
-
-interface GlobalFeedParams{
+interface BaseFeedParams {
     page: number
+}
+
+interface GlobalFeedParams extends BaseFeedParams{
     tag: string | null
+}
+
+export interface FeedData{
+    articles: Article[]
+    articlesCount: number
+}
+export interface ProfileFeed extends BaseFeedParams{
+    author: string
 }
 
 
@@ -19,7 +30,7 @@ export const projectApi = createApi({
         baseUrl: 'https://api.realworld.io/api'
     }),
     endpoints: (builder) => ({
-        getGlobalFeed: builder.query<GlobalFeedIn, GlobalFeedParams>({
+        getGlobalFeed: builder.query<FeedData, GlobalFeedParams>({
             query: ({page, tag}) => ({
                 url: '/articles',
                 method: 'get',
@@ -27,6 +38,18 @@ export const projectApi = createApi({
                     limit: PAGE_SIZE,
                     offset: page * PAGE_SIZE,
                     tag
+                }
+            }),
+            transformResponse,
+        }),
+        getProfileFeed: builder.query<FeedData, ProfileFeed>({
+            query: ({page, author}) => ({
+                url: '/articles',
+                method: 'get',
+                params: {
+                    limit: PAGE_SIZE,
+                    offset: page * PAGE_SIZE,
+                    author
                 }
             }),
         }),
@@ -41,4 +64,4 @@ export const projectApi = createApi({
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const {useGetGlobalFeedQuery, useGetPopularTagsQuery} = projectApi
+export const {useGetGlobalFeedQuery, useGetPopularTagsQuery, useGetProfileFeedQuery} = projectApi
