@@ -52,6 +52,7 @@ export const projectApi = createApi({
                     author
                 }
             }),
+            transformResponse,
         }),
         getPopularTags: builder.query<PopularTagsIn, any>({
             query: () => ({

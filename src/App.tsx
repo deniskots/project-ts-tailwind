@@ -8,7 +8,7 @@ interface AppProps {}
 
 export const App: FC<AppProps> = ({}) => {
   return (
-    <div className='pb-16'>
+    <div className='pb-16 rounded-3xl'>
         <Header/>
         <Routes>
             <Route path='/' element={<HomePage/>}/>

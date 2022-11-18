@@ -3,19 +3,36 @@ import {Subtitle} from "../../components/subtitle/subtitle.comp";
 import {MainPart} from "../../components/main-part/mainPart";
 import {useGetGlobalFeedQuery} from "../../api/repository";
 import {useSearchParams} from "react-router-dom";
+import {usePageParam} from "../../hooks/use-page-params";
+import {Container} from "../../components/container/container.comp";
+import {PostList} from "../../components/post/post-list";
+import ReactPaginate from "react-paginate";
+import {PAGE_SIZE} from "../../consts";
+import {PopularTags} from "../../components/popularTags/PopularTags";
 
 interface HomePageProps{}
 
 export const HomePage:FC<HomePageProps> = () => {
     const[searchParams] = useSearchParams()
-    const page = searchParams.get('page') ? Number(searchParams.get('page')) : 0
-    const {data, error, isLoading, isFetching,} = useGetGlobalFeedQuery({
+    const {page} = usePageParam()
+    const {data, error, isLoading, isFetching} = useGetGlobalFeedQuery({
         page,
         tag: searchParams.get('tag')
     })
     return (
         <>
             <Subtitle/>
-            <MainPart data={data} isLoading={isLoading} isFetching={isFetching} error={error}/>
+            <Container>
+                <div className='flex'>
+                    <div className='w-3/4'>
+                        <MainPart data={data} isLoading={isLoading} isFetching={isFetching} error={error}/>
+                    </div>
+                    <div className='w-1/4 pl-3'>
+                        <PopularTags />
+                    </div>
+                </div>
+            </Container>
         </>
     )}
+
+

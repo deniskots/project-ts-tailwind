@@ -5,10 +5,14 @@
 @layer base {
   body {
     font-family: 'Source Code Pro', monospace;
+    //max-width: 1500px;
+    //margin: 40px auto;
+    //-webkit-box-shadow: -1px 4px 21px 8px rgba(59,4,59,1);
+    //-moz-box-shadow: -1px 4px 21px 8px rgba(59,4,59,1);
+    //box-shadow: -1px 4px 21px 8px rgba(59,4,59,1);
   }
   a {
     @apply text-theme-black;
-
     &:hover {
       @apply underline
     }

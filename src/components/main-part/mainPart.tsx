@@ -7,7 +7,8 @@ import {PAGE_SIZE} from "../../consts";
 import {PopularTags} from "../popularTags/PopularTags";
 import {useSearchParams} from "react-router-dom";
 
-import { serializeSearchParams } from '../../utils/router';
+import {serializeSearchParams} from '../../utils/router';
+import {usePageParam} from "../../hooks/use-page-params";
 
 interface MainPartProps {
     isLoading: boolean;
@@ -16,51 +17,42 @@ interface MainPartProps {
     data?: FeedData;
 }
 
-export const MainPart: FC<MainPartProps> = ({data,isLoading,isFetching,error}) => {
-    const [searchParams, setSearchParams] = useSearchParams()
-    const page = searchParams.get('page') ? Number(searchParams.get('page')) : 0
-    const handleChangePage = ({selected}: {selected: number}) => {
-        setSearchParams(serializeSearchParams({page: String(selected)}))
+export const MainPart: FC<MainPartProps> = ({data, isLoading, isFetching, error}) => {
+    const {page, setPage} = usePageParam()
+    const handleChangePage = ({selected}: { selected: number }) => {
+        setPage(selected)
     }
 
     if (isLoading || isFetching) {
         return (
-            <Container>
+            <p>
                 Идет загрузка...
-            </Container>
+            </p>
         )
     }
     if (error) {
         return (
-            <Container>
+            <p>
                 произошла ошибка при загрузки
-            </Container>
+            </p>
         )
     }
     return (
         <Container>
-            <div className='flex'>
-                <div className='w-3/4'>
-                    <PostList list={data?.articles || []}/>
-                    <div className='my-4'>
-                        <ReactPaginate
-                            pageCount={(data?.articlesCount || 0) / PAGE_SIZE}
-                            pageRangeDisplayed={(data?.articlesCount || 0) / PAGE_SIZE}
-                            previousLabel={null}
-                            nextLabel={null}
-                            containerClassName='flex'
-                            pageLinkClassName='px-3 py-1 text-theme-red bg-white
+            <PostList list={data?.articles || []}/>
+            <div className='my-4'>
+                <ReactPaginate
+                    pageCount={(data?.articlesCount || 0) / PAGE_SIZE}
+                    pageRangeDisplayed={(data?.articlesCount || 0) / PAGE_SIZE}
+                    previousLabel={null}
+                    nextLabel={null}
+                    containerClassName='flex'
+                    pageLinkClassName='px-3 py-1 text-theme-red bg-white
                 hover:text-white hover:bg-theme-red'
-                            activeLinkClassName='text-white bg-theme-black'
-                            forcePage={page}
-                            onPageChange={handleChangePage}
-
-                        />
-                    </div>
-                </div>
-                <div className='w-1/4 pl-3'>
-                    <PopularTags />
-                </div>
+                    activeLinkClassName='text-white bg-theme-black'
+                    forcePage={page}
+                    onPageChange={handleChangePage}
+                />
             </div>
         </Container>
     );

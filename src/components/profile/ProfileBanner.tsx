@@ -8,7 +8,7 @@ interface ProfileBannerProps {
 
 export const  ProfileBanner: FC<ProfileBannerProps> = () => {
     return (
-        <div className='bg-theme-profileBanner pt-8 pb-4'>
+        <div className='bg-theme-profileBanner pt-8 pb-4 mb-8'>
             <Container>
                 <div>
                     <img src='https://cdn-icons-png.flaticon.com/512/147/147144.png' alt="" className='w-20 h-20 mx-auto mb-4'/>
