@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import {TagList} from '../tag-list/tag-list';
-import {useGetPopularTagsQuery} from "../../api/repository";
+import {useGetPopularTagsQuery} from "../../api/ProjectApi";
 import {Container} from "../container/container.comp";
 
 interface PopularTagsProps {

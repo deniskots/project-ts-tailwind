@@ -1,7 +1,7 @@
 import React, {FC, useState} from 'react';
 import {Container} from "../container/container.comp";
 import {PostList} from "../post/post-list";
-import {FeedData} from "../../api/repository";
+import {FeedData} from "../../api/ProjectApi";
 import ReactPaginate from "react-paginate";
 import {PAGE_SIZE} from "../../consts";
 import {PopularTags} from "../popularTags/PopularTags";
