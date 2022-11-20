@@ -5,10 +5,10 @@ import {Author} from "../../api/dto/global-feed.in";
 
 interface AuthorInfoProps {
     author: Author,
-    createdAt: string
+    publishedAt: string
 }
 
-const AuthorInfo:FC<AuthorInfoProps> = ({author, createdAt}) => {
+export const AuthorInfo: FC<AuthorInfoProps> = ({author, publishedAt}) => {
     return (
         <div className='flex'>
             <Link to={`/@${author.username}`}>
@@ -17,13 +17,17 @@ const AuthorInfo:FC<AuthorInfoProps> = ({author, createdAt}) => {
                      className='inline-block w-10 h-10 rounded-full'/>
             </Link>
             <div className='mr-6 ml-2 inline-flex flex-col '>
-                <Link to={`/@${author.username}`} className='font-medium text-theme-green'>
+                <Link
+                    to={`/@${encodeURIComponent(author.username)}`}
+                    className='font-medium text-theme-green'
+                >
                     {author.username}
                 </Link>
-                <span className='text-theme-grey text-sm'>{DateTime.fromISO(createdAt).toLocaleString(DateTime.DATE_FULL)}</span>
+                <span className='text-theme-grey text-sm'>
+                    {DateTime.fromISO(publishedAt).toLocaleString(DateTime.DATE_FULL)}
+                </span>
             </div>
         </div>
     );
 };
 
-export default AuthorInfo;

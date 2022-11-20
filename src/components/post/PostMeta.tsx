@@ -1,24 +1,22 @@
 import React, {FC} from 'react';
-import AuthorInfo from "./AuthorInfo";
+import {AuthorInfo} from "./AuthorInfo";
 import {FollowButton} from "../profile/FollowButton";
+import {Author} from '../../api/dto/singlePost.in';
 
 interface PostMetaProps {
-
+    author: Author;
+    publishedAt: string
 }
 
-export const PostMeta:FC<PostMetaProps> = () => {
+export const PostMeta: FC<PostMetaProps> = ({author, publishedAt}) => {
     return (
         <div>
             <div className='flex mb-4'>
                 <AuthorInfo
-                    author={{
-                        username: 'Aloha Sem',
-                        image: 'https://cdn-icons-png.flaticon.com/512/147/147144.png?w=826&t=st=1668864116~exp=1668864716~hmac=62e839f982c3b3e6318bda633964e79220b59fec28e98c2b1a650cea46b3279c',
-                        following: false
-                    }}
-                    createdAt={new Date().toISOString()}
+                    author={author}
+                    publishedAt={publishedAt}
                 />
-                <FollowButton username='Cosmos Wind'/>
+                <FollowButton username={author.username}/>
             </div>
         </div>
     );

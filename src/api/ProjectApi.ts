@@ -5,6 +5,7 @@ import {Article, GlobalFeedIn} from "./dto/global-feed.in";
 import {PAGE_SIZE} from "../consts";
 import {PopularTagsIn} from "./dto/popularTags.in";
 import {transformResponse} from "../utils/transformResponse";
+import {SinglePostIn} from "./dto/singlePost.in";
 
 interface BaseFeedParams {
     page: number
@@ -20,6 +21,9 @@ export interface FeedData{
 }
 export interface ProfileFeed extends BaseFeedParams{
     author: string
+}
+export interface SinglePostParams {
+    slug: string
 }
 
 
@@ -59,10 +63,22 @@ export const projectApi = createApi({
                 url: '/tags',
                 method: 'get',
             })
+        }),
+        getSinglePost: builder.query<SinglePostIn, SinglePostParams>({
+            query: ({slug}) => ({
+                url:`/articles/${slug}`,
+                method: 'get'
+            })
+
         })
     }),
 })
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const {useGetGlobalFeedQuery, useGetPopularTagsQuery, useGetProfileFeedQuery} = projectApi
+export const {
+    useGetGlobalFeedQuery,
+    useGetPopularTagsQuery,
+    useGetProfileFeedQuery,
+    useGetSinglePostQuery
+} = projectApi

@@ -4,7 +4,7 @@ import {LikeButton} from "../like-button/likeButton";
 import {TagList} from "../tag-list/tag-list";
 import {Article} from "../../api/dto/global-feed.in";
 import {DateTime} from "luxon";
-import AuthorInfo from "./AuthorInfo";
+import {AuthorInfo} from "./AuthorInfo";
 
 interface PostProps extends Article{
 
@@ -15,7 +15,7 @@ export const Post: FC<PostProps> = ({author, createdAt, favoritesCount,title, de
         <article>
             <div className='border-t border-black/10 py-4'>
                 <div className='mb-4 flex justify-between'>
-                    <AuthorInfo author={author} createdAt={createdAt}/>
+                    <AuthorInfo author={author} publishedAt={createdAt}/>
                     <LikeButton count={favoritesCount}/>
                 </div>
                 <Link to={`/article/${encodeURIComponent(slug)}`} className='hover:no-underline'>
