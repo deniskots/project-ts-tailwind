@@ -15,7 +15,7 @@ export const FullPostPage: FC<FullPostPageProps> = () => {
     const {slug} = useParams()
     const {data} = useGetSinglePostQuery({slug: slug!})
 
-    if (!data) {
+    if (!data) {git
         return (
             <Container>
                 <h1> Публикации не загрузились</h1>
@@ -37,11 +37,27 @@ export const FullPostPage: FC<FullPostPageProps> = () => {
 
                     <TagList list={data.article.tagList}/>
                 </div>
-                <div className='flex justify-center'>
+                <div className='flex justify-center mb-16'>
                     <PostMeta
                         author={data.article.author}
                         publishedAt={data.article.createdAt}
                     />
+                </div>
+                <div className='max-w-3xl mx-auto'>
+                    <div className='border border-theme-grey rounded '>
+                        <div className='p-4'>
+                            <p>
+                                Assumenda molestiae laboriosam enim ipsum quaerat enim officia vel quo.
+                                Earum odit rem natus totam atque cumque. Sint dolorem facere non.
+                            </p>
+                        </div>
+                        <div className='flex py-2 px-4 border-t bg-theme-tagBg'>
+                            <PostMeta
+                                author={data.article.author}
+                                publishedAt={data.article.createdAt}
+                            />
+                        </div>
+                    </div>
                 </div>
             </Container>
         </>
