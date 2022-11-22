@@ -13,7 +13,11 @@ interface TagListProps {
     itemsAs?: 'li' | 'a';
 }
 
-export const TagList: FC<TagListProps> = ({list, tagStyle = TagListStyle.LIGHT, itemsAs= 'li'}) => {
+export const TagList: FC<TagListProps> = ({
+                                              list,
+                                              tagStyle = TagListStyle.LIGHT,
+                                              itemsAs= 'li'
+}) => {
     const tagClasses = clsx('font-light text-sm border border mr-1 px-1 rounded mb-2',
         {'border-theme-grey text-theme-grey': tagStyle === TagListStyle.LIGHT,
         'bg-theme-tagItemBg text-white hover:no-underline': tagStyle ===TagListStyle.DARK})

@@ -1,13 +1,10 @@
-import React, {FC, useState} from 'react';
+import React, {FC} from 'react';
 import {Subtitle} from "../../components/subtitle/subtitle.comp";
 import {MainPart} from "../../components/main-part/mainPart";
 import {useGetGlobalFeedQuery} from "../../api/ProjectApi";
 import {useSearchParams} from "react-router-dom";
 import {usePageParam} from "../../hooks/use-page-params";
 import {Container} from "../../components/container/container.comp";
-import {PostList} from "../../components/post/post-list";
-import ReactPaginate from "react-paginate";
-import {PAGE_SIZE} from "../../consts";
 import {PopularTags} from "../../components/popularTags/PopularTags";
 
 interface HomePageProps{}

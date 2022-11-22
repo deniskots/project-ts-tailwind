@@ -19,7 +19,7 @@ export interface Article {
 
 export interface Author {
    username: string;
-   bio: string;
+   bio?: string;
    image: string;
    following: boolean;
 }

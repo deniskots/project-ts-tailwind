@@ -1,27 +1,30 @@
 // Need to use the React-specific entry point to import createApi
-import { createApi } from '@reduxjs/toolkit/query/react'
+import {createApi} from '@reduxjs/toolkit/query/react'
 import {axiosBaseQuery} from "../core/axios-base-query";
 import {Article, GlobalFeedIn} from "./dto/global-feed.in";
 import {PAGE_SIZE} from "../consts";
 import {PopularTagsIn} from "./dto/popularTags.in";
 import {transformResponse} from "../utils/transformResponse";
 import {SinglePostIn} from "./dto/singlePost.in";
+import {PostCommentsIn} from "./dto/postComments.in";
 
 interface BaseFeedParams {
     page: number
 }
 
-interface GlobalFeedParams extends BaseFeedParams{
+interface GlobalFeedParams extends BaseFeedParams {
     tag: string | null
 }
 
-export interface FeedData{
+export interface FeedData {
     articles: Article[]
     articlesCount: number
 }
-export interface ProfileFeed extends BaseFeedParams{
+
+export interface ProfileFeed extends BaseFeedParams {
     author: string
 }
+
 export interface SinglePostParams {
     slug: string
 }
@@ -66,19 +69,26 @@ export const projectApi = createApi({
         }),
         getSinglePost: builder.query<SinglePostIn, SinglePostParams>({
             query: ({slug}) => ({
-                url:`/articles/${slug}`,
+                url: `/articles/${slug}`,
+                method: 'get'
+            }),
+        }),
+
+        getPostComments: builder.query<PostCommentsIn, SinglePostParams>({
+            query: ({slug}) => ({
+                url: `/articles/${slug}/comments`,
                 method: 'get'
             })
-
-        })
+        }),
     }),
 })
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const {
-    useGetGlobalFeedQuery,
-    useGetPopularTagsQuery,
-    useGetProfileFeedQuery,
-    useGetSinglePostQuery
-} = projectApi
+    export const {
+        useGetGlobalFeedQuery,
+        useGetPopularTagsQuery,
+        useGetProfileFeedQuery,
+        useGetSinglePostQuery,
+        useGetPostCommentsQuery
+    } = projectApi
