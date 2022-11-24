@@ -25,12 +25,12 @@ export const Header: FC<HeaderProps> = () => {
                                 </NavLink>
                             </li>
                             <li className='ml-4'>
-                                <NavLink to='/signIn' className={navLinksClsx}>
+                                <NavLink to='/sign-in' className={navLinksClsx}>
                                     Ввойти
                                 </NavLink>
                             </li>
                             <li className='ml-4'>
-                                <NavLink to='/signUp' className={navLinksClsx}>
+                                <NavLink to='/sign-up' className={navLinksClsx}>
                                     Создать
                                 </NavLink>
                             </li>

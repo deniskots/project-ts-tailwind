@@ -1,7 +1,6 @@
 import React, {FC} from 'react';
 import {Link, useParams} from 'react-router-dom';
-import {PostMeta} from "../post/PostMeta";
-import {useGetPostCommentsQuery, useGetSinglePostQuery} from "../../api/ProjectApi";
+import {useGetPostCommentsQuery} from "../../api/ProjectApi";
 import {Comment} from "./Comment";
 
 interface CommentListProps {

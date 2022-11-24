@@ -45,9 +45,6 @@ export const FullPostPage: FC<FullPostPageProps> = () => {
                     />
                 </div>
                <CommentList/>
-
-
-
             </Container>
         </>
     );
