@@ -6,15 +6,13 @@ import {useForm} from "react-hook-form";
 import * as yup from 'yup';
 import {yupResolver} from '@hookform/resolvers/yup';
 import {Button} from "../../components/Button/Button";
-import {useLazySignInQuery, useLazySignUpQuery} from "../../api/AuthApi";
 import { toast } from 'react-toastify';
-import {useAppDispatch} from "../../store/store";
-import {setUser} from "../../slices/AuthSlice";
+import {useAuth} from "../../hooks/use-auth";
 
 export interface SignInPageProps {
 }
 
-interface SignInFormValues {
+export interface SignInFormValues {
     email: string;
     password: string;
 
@@ -27,7 +25,7 @@ let validSchema = yup.object({
 
 export const SignInPage: FC<SignInPageProps> = () => {
     const navigate = useNavigate()
-    const dispatch = useAppDispatch()
+    const {signIn} = useAuth()
 
     const {register, handleSubmit, formState} = useForm<SignInFormValues>({
         defaultValues: {
@@ -37,15 +35,10 @@ export const SignInPage: FC<SignInPageProps> = () => {
         resolver: yupResolver(validSchema),
     });
 
-    const [triggerSignIn] = useLazySignInQuery()
 
     const onSubmitH =  async (values: SignInFormValues) => {
         try{
-            const {data} = await triggerSignIn(values, false)
-            if(!data) {
-                throw new Error('No data in query')
-            }
-            dispatch(setUser(data.user))
+            await signIn(values)
             navigate('/')
         }catch (e) {
             toast.error('Что-то пошло не так...')

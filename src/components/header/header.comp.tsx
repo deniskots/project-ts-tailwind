@@ -2,11 +2,13 @@ import React, {FC} from 'react';
 import {Link, NavLink} from 'react-router-dom';
 import clsx from "clsx";
 import { Container } from '../container/container.comp';
+import {useAuth} from "../../hooks/use-auth";
 
 interface HeaderProps {
 }
 
 export const Header: FC<HeaderProps> = () => {
+    const {isLogged} = useAuth()
     const navLinksClsx = ({isActive}: {isActive: boolean}) => clsx('text-theme-white hover:no-underline', {
         'text-theme-black': isActive
     })
@@ -24,16 +26,27 @@ export const Header: FC<HeaderProps> = () => {
                                     Главная
                                 </NavLink>
                             </li>
-                            <li className='ml-4'>
-                                <NavLink to='/sign-in' className={navLinksClsx}>
-                                    Ввойти
-                                </NavLink>
-                            </li>
-                            <li className='ml-4'>
-                                <NavLink to='/sign-up' className={navLinksClsx}>
-                                    Создать
-                                </NavLink>
-                            </li>
+                            { isLogged ? (
+                                <li className='ml-4'>
+                                    <NavLink to='/' className={navLinksClsx}>
+                                        Ввыйти
+                                    </NavLink>
+                                </li>
+                                ) : (
+                                <>
+                                    <li className='ml-4'>
+                                    <NavLink to='/sign-in' className={navLinksClsx}>
+                                        Ввойти
+                                    </NavLink>
+                                </li>
+                                    <li className='ml-4'>
+                                        <NavLink to='/sign-up' className={navLinksClsx}>
+                                            Создать
+                                        </NavLink>
+                                    </li>
+                                </>
+
+                            )}
                         </ul>
                     </div>
                 </Container>
