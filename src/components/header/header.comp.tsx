@@ -8,7 +8,7 @@ interface HeaderProps {
 }
 
 export const Header: FC<HeaderProps> = () => {
-    const {isLogged} = useAuth()
+    const {isLogged, logOut} = useAuth()
     const navLinksClsx = ({isActive}: {isActive: boolean}) => clsx('text-theme-white hover:no-underline', {
         'text-theme-black': isActive
     })
@@ -28,7 +28,7 @@ export const Header: FC<HeaderProps> = () => {
                             </li>
                             { isLogged ? (
                                 <li className='ml-4'>
-                                    <NavLink to='/' className={navLinksClsx}>
+                                    <NavLink to='/' className='text-theme-white hover:no-underline hover:text-theme-black' onClick={logOut}>
                                         Ввыйти
                                     </NavLink>
                                 </li>

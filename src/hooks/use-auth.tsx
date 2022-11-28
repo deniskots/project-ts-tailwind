@@ -31,5 +31,9 @@ export const useAuth = () => {
         dispatch(setUser(data.user))
     }
 
-    return {isLogged, signIn, signUp}
+    const logOut = () => {
+        dispatch(setUser(null))
+    }
+
+    return {isLogged, signIn, signUp, logOut}
 }
