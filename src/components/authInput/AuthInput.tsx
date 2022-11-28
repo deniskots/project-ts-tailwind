@@ -1,4 +1,4 @@
-import React, {ComponentProps, FC, forwardRef} from 'react';
+import React, {ComponentProps, forwardRef} from 'react';
 import {ref} from "yup";
 
 interface AuthInputProps{

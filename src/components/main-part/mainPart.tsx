@@ -42,8 +42,8 @@ export const MainPart: FC<MainPartProps> = ({data, isLoading, isFetching, error}
             <PostList list={data?.articles || []}/>
             <div className='my-4'>
                 <ReactPaginate
-                    pageCount={(data?.articlesCount || 0) / PAGE_SIZE}
-                    pageRangeDisplayed={(data?.articlesCount || 0) / PAGE_SIZE}
+                    pageCount={Math.ceil((data?.articlesCount || 0) / PAGE_SIZE)}
+                    pageRangeDisplayed={Math.ceil((data?.articlesCount || 0) / PAGE_SIZE)}
                     previousLabel={null}
                     nextLabel={null}
                     containerClassName='flex'
