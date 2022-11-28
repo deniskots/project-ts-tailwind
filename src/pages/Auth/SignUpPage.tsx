@@ -9,7 +9,7 @@ import {Button} from "../../components/Button/Button";
 import {useLazySignUpQuery} from "../../api/AuthApi";
 import { toast } from 'react-toastify';
 import {useAppDispatch} from "../../store/store";
-import {setUser} from "../../slices/SignUpSlice";
+import {setUser} from "../../slices/AuthSlice";
 
 export interface SignUpPageProps {
 }

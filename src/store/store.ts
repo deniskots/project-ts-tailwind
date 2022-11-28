@@ -4,7 +4,7 @@ import type { TypedUseSelectorHook } from 'react-redux'
 import {projectApi} from "../api/ProjectApi";
 import {profileApi} from "../api/ProfileApi";
 import {authApi} from "../api/AuthApi";
-import {authSlice} from "../slices/SignUpSlice";
+import {authSlice} from "../slices/AuthSlice";
 import {persistReducer, persistStore} from "redux-persist";
 import storage from "redux-persist/lib/storage";
 

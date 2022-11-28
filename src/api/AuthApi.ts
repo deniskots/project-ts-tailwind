@@ -2,6 +2,8 @@ import {createApi} from "@reduxjs/toolkit/dist/query/react";
 import {axiosBaseQuery} from "../core/axios-base-query";
 import {SignUpIn} from "./dto/sign-up.in";
 import { SignUpOut } from "./dto/sign-up.out";
+import {SignInIn} from "./dto/sign-in.in";
+import {SignInOut} from "./dto/sign-in.out";
 
 
 export const authApi = createApi({
@@ -19,9 +21,20 @@ export const authApi = createApi({
                 }
             }),
         }),
+
+        signIn: builder.query<SignInIn, SignInOut['user']>({
+            query: (args) => ({
+                url: '/users/login',
+                method: 'post',
+                data: {
+                    user: args
+                }
+            }),
+        }),
     })
 })
 
 export const {
-  useLazySignUpQuery
+  useLazySignUpQuery,
+    useLazySignInQuery
 } = authApi
