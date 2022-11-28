@@ -6,10 +6,8 @@ import {useForm} from "react-hook-form";
 import * as yup from 'yup';
 import {yupResolver} from '@hookform/resolvers/yup';
 import {Button} from "../../components/Button/Button";
-import {useLazySignUpQuery} from "../../api/AuthApi";
 import { toast } from 'react-toastify';
-import {useAppDispatch} from "../../store/store";
-import {setUser} from "../../slices/AuthSlice";
+import {useAuth} from "../../hooks/use-auth";
 
 export interface SignUpPageProps {
 }
@@ -29,7 +27,7 @@ let validSchema = yup.object({
 
 export const SignUpPage: FC<SignUpPageProps> = () => {
     const navigate = useNavigate()
-    const dispatch = useAppDispatch()
+    const {signUp} = useAuth()
 
     const {register, handleSubmit, formState} = useForm<SignUpFormValues>({
         defaultValues: {
@@ -40,15 +38,10 @@ export const SignUpPage: FC<SignUpPageProps> = () => {
         resolver: yupResolver(validSchema),
     });
 
-    const [triggerSignUp] = useLazySignUpQuery()
 
     const onSubmitH =  async (values: SignUpFormValues) => {
         try{
-           const {data} = await triggerSignUp(values, false)
-            if(!data) {
-                throw new Error('No data in query')
-            }
-            dispatch(setUser(data.user))
+           await signUp(values)
             navigate('/')
         }catch (e) {
             toast.error('Что-то пошло не так...')
