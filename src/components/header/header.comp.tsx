@@ -1,15 +1,17 @@
 import React, {FC} from 'react';
 import {Link, NavLink} from 'react-router-dom';
 import clsx from "clsx";
-import { Container } from '../container/container.comp';
+import {Container} from '../container/container.comp';
 import {useAuth} from "../../hooks/use-auth";
+import {IoCreateOutline} from "react-icons/io5";
+import {FiLogOut, FiSettings} from "react-icons/fi";
 
 interface HeaderProps {
 }
 
 export const Header: FC<HeaderProps> = () => {
-    const {isLogged, logOut} = useAuth()
-    const navLinksClsx = ({isActive}: {isActive: boolean}) => clsx('text-theme-white hover:no-underline', {
+    const {isLogged, logOut, user} = useAuth()
+    const navLinksClsx = ({isActive}: { isActive: boolean }) => clsx('text-theme-white hover:no-underline', {
         'text-theme-black': isActive
     })
     return (
@@ -22,31 +24,54 @@ export const Header: FC<HeaderProps> = () => {
                         </Link>
                         <ul className='font-josefin text-xl mr-8 flex justify-between list-none'>
                             <li>
-                                <NavLink to='/' className={navLinksClsx} >
+                                <NavLink to='/' className={navLinksClsx}>
                                     Главная
                                 </NavLink>
                             </li>
-                            { isLogged ? (
-                                <li className='ml-4'>
-                                    <NavLink to='/' className='text-theme-white hover:no-underline hover:text-theme-black' onClick={logOut}>
-                                        Ввыйти
-                                    </NavLink>
-                                </li>
-                                ) : (
+                            {isLogged ? (
                                 <>
                                     <li className='ml-4'>
-                                    <NavLink to='/sign-in' className={navLinksClsx}>
-                                        Ввойти
-                                    </NavLink>
-                                </li>
+                                        <NavLink to='/editor' className={navLinksClsx}>
+                                            <IoCreateOutline/>
+                                        </NavLink>
+                                    </li>
                                     <li className='ml-4'>
-                                        <NavLink to='/sign-up' className={navLinksClsx}>
-                                            Создать
+                                        <NavLink to='/settings' className={navLinksClsx}>
+                                            <FiSettings/>
+                                        </NavLink>
+                                    </li>
+                                    <li className='ml-4'>
+                                        <NavLink to = {`/@${user?.username}`} className={navLinksClsx}>
+                                            <div className='flex '>
+                                                <img className='w-6 h-6 rounded mr-1' src={user?.image} alt="avatar"/>
+                                                {user?.username}
+                                            </div>
+
+                                        </NavLink>
+                                    </li>
+                                    <li className='ml-4'>
+                                        <NavLink to='/'
+                                                 className='text-theme-white hover:no-underline hover:text-theme-black'
+                                                 onClick={logOut}>
+                                            <FiLogOut/>
                                         </NavLink>
                                     </li>
                                 </>
+                                ) : (
+                                <>
+                                <li className='ml-4'>
+                                <NavLink to='/sign-in' className={navLinksClsx}>
+                                Ввойти
+                                </NavLink>
+                                </li>
+                                <li className='ml-4'>
+                                <NavLink to='/sign-up' className={navLinksClsx}>
+                                Создать
+                                </NavLink>
+                                </li>
+                                </>
 
-                            )}
+                                )}
                         </ul>
                     </div>
                 </Container>

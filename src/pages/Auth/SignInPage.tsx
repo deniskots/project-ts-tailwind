@@ -49,7 +49,7 @@ export const SignInPage: FC<SignInPageProps> = () => {
         <Container>
             <div className='mt-8'>
                 <h1 className='text-4xl font-bold text-center mb-4'>Авторизация</h1>
-                <p className='text-center mb-8'><Link to='/sign-in'>Нет аккаунта...</Link></p>
+                <p className='text-center mb-8'><Link to='/sign-up'>Нет аккаунта...</Link></p>
                 <form
                     className='max-w-xl mx-auto flex flex-col gap-4 mb-6'
                     onSubmit={handleSubmit(onSubmitH)}

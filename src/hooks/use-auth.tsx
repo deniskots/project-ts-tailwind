@@ -1,4 +1,3 @@
-
 import {selectUser, setUser} from "../slices/AuthSlice";
 import {useAppDispatch, useAppSelector} from "../store/store";
 import {useLazySignInQuery, useLazySignUpQuery} from "../api/AuthApi";
@@ -35,5 +34,5 @@ export const useAuth = () => {
         dispatch(setUser(null))
     }
 
-    return {isLogged, signIn, signUp, logOut}
+    return {isLogged, signIn, signUp, logOut, user}
 }

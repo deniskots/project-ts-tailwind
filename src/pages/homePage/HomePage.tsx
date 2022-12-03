@@ -6,10 +6,12 @@ import {useSearchParams} from "react-router-dom";
 import {usePageParam} from "../../hooks/use-page-params";
 import {Container} from "../../components/container/container.comp";
 import {PopularTags} from "../../components/popularTags/PopularTags";
+import {useAuth} from "../../hooks/use-auth";
 
 interface HomePageProps{}
 
 export const HomePage:FC<HomePageProps> = () => {
+    const {isLogged} = useAuth()
     const[searchParams] = useSearchParams()
     const {page} = usePageParam()
     const {data, error, isLoading, isFetching} = useGetGlobalFeedQuery({
@@ -18,9 +20,9 @@ export const HomePage:FC<HomePageProps> = () => {
     })
     return (
         <>
-            <Subtitle/>
+            {!isLogged && <Subtitle/>}
             <Container>
-                <div className='flex'>
+                <div className='flex py-4'>
                     <div className='w-3/4'>
                         <MainPart data={data} isLoading={isLoading} isFetching={isFetching} error={error}/>
                     </div>
