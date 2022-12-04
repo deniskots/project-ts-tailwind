@@ -9,6 +9,7 @@ import {useSearchParams} from "react-router-dom";
 
 import {serializeSearchParams} from '../../utils/router';
 import {usePageParam} from "../../hooks/use-page-params";
+import {ArticleToggle} from "../articleToggle/ArticleToggle";
 
 interface MainPartProps {
     isLoading: boolean;

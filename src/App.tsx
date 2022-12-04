@@ -16,6 +16,7 @@ export const App: FC<AppProps> = ({}) => {
         <Routes>
             <Route path='/' element={<HomePage/>}/>
             <Route path='/@:profile' element={<ProfilePage/>}/>
+            <Route path="/@:profile/favorites" element={<ProfilePage />} />
             <Route path='/article/:slug' element={<FullPostPage/>}/>
             <Route path='/sign-up' element={<SignUpPage/>}/>
             <Route path='/sign-in' element={<SignInPage/>}/>

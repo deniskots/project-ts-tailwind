@@ -7,6 +7,7 @@ import {usePageParam} from "../../hooks/use-page-params";
 import {Container} from "../../components/container/container.comp";
 import {PopularTags} from "../../components/popularTags/PopularTags";
 import {useAuth} from "../../hooks/use-auth";
+import {ArticleToggle} from "../../components/articleToggle/ArticleToggle";
 
 interface HomePageProps{}
 
@@ -22,6 +23,7 @@ export const HomePage:FC<HomePageProps> = () => {
         <>
             {!isLogged && <Subtitle/>}
             <Container>
+                <ArticleToggle/>
                 <div className='flex py-4'>
                     <div className='w-3/4'>
                         <MainPart data={data} isLoading={isLoading} isFetching={isFetching} error={error}/>

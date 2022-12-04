@@ -22,7 +22,7 @@ export const Header: FC<HeaderProps> = () => {
                         <Link to='/' className='font-josefin text-2xl mr-8 text-theme-red'>
                             Your Logo
                         </Link>
-                        <ul className='font-josefin text-xl mr-8 flex justify-between list-none'>
+                        <ul className='font-russo text-xl mr-8 flex justify-between list-none'>
                             <li>
                                 <NavLink to='/' className={navLinksClsx}>
                                     Главная
@@ -59,12 +59,12 @@ export const Header: FC<HeaderProps> = () => {
                                 </>
                                 ) : (
                                 <>
-                                <li className='ml-4'>
+                                <li className='ml-4 font-russo'>
                                 <NavLink to='/sign-in' className={navLinksClsx}>
                                 Ввойти
                                 </NavLink>
                                 </li>
-                                <li className='ml-4'>
+                                <li className='ml-4 font-russo'>
                                 <NavLink to='/sign-up' className={navLinksClsx}>
                                 Создать
                                 </NavLink>
