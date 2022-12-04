@@ -14,6 +14,7 @@ interface BaseFeedParams {
 
 interface GlobalFeedParams extends BaseFeedParams {
     tag: string | null
+    isPersonalArticles: boolean
 }
 
 export interface FeedData {
@@ -39,8 +40,8 @@ export const projectApi = createApi({
     }),
     endpoints: (builder) => ({
         getGlobalFeed: builder.query<FeedData, GlobalFeedParams>({
-            query: ({page, tag}) => ({
-                url: '/articles',
+            query: ({page, tag, isPersonalArticles}) => ({
+                url: isPersonalArticles ? '/articles/feed' : '/articles',
                 method: 'get',
                 params: {
                     limit: PAGE_SIZE,

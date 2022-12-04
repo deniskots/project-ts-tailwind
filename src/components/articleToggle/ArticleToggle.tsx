@@ -18,14 +18,16 @@ export const ArticleToggle: FC<ArticleToggleProps> = ({
                                                           defaultLink = '/',
                                                           items = [],
                                                       }) => {
+
     const [searchParams] = useSearchParams();
     const tag = searchParams.get('tag');
 
-    const globalClasses = ({ isActive }: { isActive: boolean }) => {
+    const globalClasses = ({isActive}: { isActive: boolean }) => {
         return clsx('bg-white border-theme-green py-2 px-4 hover:no-underline', {
             'text-black/30 hover:text-black/60': tag || !isActive,
         });
     };
+
     return (
         <div className="h-8 font-russo mt-4">
             <ul className="flex">
