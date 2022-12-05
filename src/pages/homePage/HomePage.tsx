@@ -12,11 +12,6 @@ import {routes} from "../../utils/routes";
 
 interface HomePageProps{}
 
-interface PathPattern {
-    path: string;
-    caseSensitive?: boolean;
-    end?: boolean;
-}
 
 export const HomePage:FC<HomePageProps> = () => {
     const {isLogged} = useAuth()

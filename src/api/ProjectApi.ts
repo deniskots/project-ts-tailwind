@@ -7,6 +7,7 @@ import {PopularTagsIn} from "./dto/popularTags.in";
 import {transformResponse} from "../utils/transformResponse";
 import {SinglePostIn} from "./dto/singlePost.in";
 import {PostCommentsIn} from "./dto/postComments.in";
+import {FavoriteArticleIn} from "./dto/get-favoriteArticle";
 
 interface BaseFeedParams {
     page: number
@@ -28,6 +29,10 @@ export interface ProfileFeed extends BaseFeedParams {
 }
 
 export interface SinglePostParams {
+    slug: string
+}
+
+export interface FavoriteArticleParams {
     slug: string
 }
 
@@ -83,6 +88,12 @@ export const projectApi = createApi({
                 method: 'get'
             })
         }),
+        getFavoriteArticle: builder.mutation<FavoriteArticleIn, FavoriteArticleParams>({
+            query: ({slug}) => ({
+                url: `/articles/${slug}/favorite`,
+                method: 'post'
+            })
+        })
     }),
 })
 
@@ -93,5 +104,6 @@ export const projectApi = createApi({
         useGetPopularTagsQuery,
         useGetProfileFeedQuery,
         useGetSinglePostQuery,
-        useGetPostCommentsQuery
+        useGetPostCommentsQuery,
+        useGetFavoriteArticleMutation
     } = projectApi

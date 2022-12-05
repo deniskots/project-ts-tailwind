@@ -16,7 +16,7 @@ export const Post: FC<PostProps> = ({author, createdAt, favoritesCount,title, de
             <div className='border-t border-black/10 py-4'>
                 <div className='mb-4 flex justify-between'>
                     <AuthorInfo author={author} publishedAt={createdAt}/>
-                    <LikeButton count={favoritesCount}/>
+                    <LikeButton count={favoritesCount} slug={slug}/>
                 </div>
                 <Link to={`/article/${encodeURIComponent(slug)}`} className='hover:no-underline'>
                     <h1 className='font-bold text-xl'>
