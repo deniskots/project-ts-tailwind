@@ -4,12 +4,9 @@ import {PostList} from "../post/post-list";
 import {FeedData} from "../../api/ProjectApi";
 import ReactPaginate from "react-paginate";
 import {PAGE_SIZE} from "../../consts";
-import {PopularTags} from "../popularTags/PopularTags";
-import {useSearchParams} from "react-router-dom";
 
-import {serializeSearchParams} from '../../utils/router';
 import {usePageParam} from "../../hooks/use-page-params";
-import {ArticleToggle} from "../articleToggle/ArticleToggle";
+
 
 interface MainPartProps {
     isLoading: boolean;

@@ -20,7 +20,7 @@ export const HomePage:FC<HomePageProps> = () => {
 
     const personalArticles = useMatch(routes.personalArticles.path)
 
-    const {data, error, isLoading, isFetching} = useGetGlobalFeedQuery({
+    const {data, error, isLoading, isFetching, } = useGetGlobalFeedQuery({
         page,
         tag: searchParams.get('tag'),
         isPersonalArticles: personalArticles !== null,
